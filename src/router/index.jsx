@@ -13,7 +13,11 @@ import ManageStudentPage from "../pages/Manager/students/index.jsx";
 import StudentPage from "../pages/Student/StudentOverview/index.jsx";
 import secureLocalStorage from "react-secure-storage";
 import { MANAGER_SESSION, STORAGE_KEY } from "../utils/const.js";
-import { getCategories, getCourses } from "../services/courseService.js";
+import {
+  getCategories,
+  getCourseDetail,
+  getCourses,
+} from "../services/courseService.js";
 
 const router = createBrowserRouter([
   {
@@ -66,7 +70,17 @@ const router = createBrowserRouter([
         loader: async () => {
           const categories = await getCategories();
 
-          return categories;
+          return { categories, course: null };
+        },
+        element: <ManageCreateCoursePage />,
+      },
+      {
+        path: "/manager/courses/edit/:id",
+        loader: async ({ params }) => {
+          const categories = await getCategories();
+          const course = await getCourseDetail(params.id);
+
+          return { categories, course };
         },
         element: <ManageCreateCoursePage />,
       },
