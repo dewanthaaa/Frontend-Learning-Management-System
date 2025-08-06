@@ -80,7 +80,9 @@ const router = createBrowserRouter([
           const categories = await getCategories();
           const course = await getCourseDetail(params.id);
 
-          return { categories, course };
+          console.log(course);
+
+          return { categories, course: course?.data };
         },
         element: <ManageCreateCoursePage />,
       },

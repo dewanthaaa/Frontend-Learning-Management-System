@@ -14,3 +14,11 @@ export const createCourse = async (data) =>
       },
     })
     .then((res) => res.data);
+export const updateCourse = async (data, id) =>
+  apiInstanceAuth
+    .put(`/courses/${id}`, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((res) => res.data);
