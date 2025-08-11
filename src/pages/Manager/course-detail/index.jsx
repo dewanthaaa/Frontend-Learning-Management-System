@@ -7,8 +7,6 @@ export default function ManageCourseDetailPage() {
 
   const course = useLoaderData();
 
-  console.log(course);
-
   return (
     <>
       <div
@@ -92,7 +90,7 @@ export default function ManageCourseDetailPage() {
           </div>
         </div>
       </section>
-      <TableContent />
+      <TableContent details={course?.details ?? []} courseId={course?._id} />
     </>
   );
 }
