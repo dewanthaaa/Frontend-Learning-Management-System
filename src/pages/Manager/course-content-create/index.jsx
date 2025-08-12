@@ -12,9 +12,12 @@ export default function ManageContentCreatePage() {
     handleSubmit,
     formState: { errors },
     setValue,
+    watch,
   } = useForm({
     resolver: zodResolver(mutateContentSchema),
   });
+
+  const type = watch("type");
 
   const onSubmit = (values) => {
     console.log(values);
@@ -111,58 +114,62 @@ export default function ManageContentCreatePage() {
             {errors?.type?.message}
           </span>
         </div>
-        <div className="flex flex-col gap-[10px]">
-          <label htmlFor="video" className="font-semibold">
-            Youtube Video ID
-          </label>
-          <div className="flex items-center w-full rounded-full border border-[#CFDBEF] gap-3 px-5 transition-all duration-300 focus-within:ring-2 focus-within:ring-[#662FFF]">
-            <img
-              src="/assets/images/icons/bill-black.svg"
-              className="w-6 h-6"
-              alt="icon"
-            />
-            <input
-              {...register("youtubeId")}
-              type="text"
-              id="video"
-              className="appearance-none outline-none w-full py-3 font-semibold placeholder:font-normal placeholder:text-[#838C9D] !bg-transparent"
-              placeholder="Write tagline for better copy"
-            />
+        {type === "video" && (
+          <div className="flex flex-col gap-[10px]">
+            <label htmlFor="video" className="font-semibold">
+              Youtube Video ID
+            </label>
+            <div className="flex items-center w-full rounded-full border border-[#CFDBEF] gap-3 px-5 transition-all duration-300 focus-within:ring-2 focus-within:ring-[#662FFF]">
+              <img
+                src="/assets/images/icons/bill-black.svg"
+                className="w-6 h-6"
+                alt="icon"
+              />
+              <input
+                {...register("youtubeId")}
+                type="text"
+                id="video"
+                className="appearance-none outline-none w-full py-3 font-semibold placeholder:font-normal placeholder:text-[#838C9D] !bg-transparent"
+                placeholder="Write tagline for better copy"
+              />
+            </div>
+            <span className="error-message text-[#FF435A]">
+              {errors?.youtubeId?.message}
+            </span>
           </div>
-          <span className="error-message text-[#FF435A]">
-            {errors?.youtubeId?.message}
-          </span>
-        </div>
+        )}
 
-        <div className="flex flex-col gap-[10px]">
-          <label className="font-semibold">Content Text</label>
-          {/* <div id="editor"></div> */}
-          <CKEditor
-            editor={ClassicEditor}
-            config={{
-              licenseKey: "GPL", // Free (Open-Source).
-              plugins: [Essentials, Paragraph, Bold, Italic],
-              toolbar: [
-                "undo",
-                "redo",
-                "|",
-                "bold",
-                "italic",
-                "|",
-                "formatPainter",
-              ],
-              initialData: "<p>Hello from CKEditor 5 in React!</p>",
-            }}
-            onChange={(_, editor) => {
-              const data = editor.getData();
+        {type === "text" && (
+          <div className="flex flex-col gap-[10px]">
+            <label className="font-semibold">Content Text</label>
+            {/* <div id="editor"></div> */}
+            <CKEditor
+              editor={ClassicEditor}
+              config={{
+                licenseKey: "GPL", // Free (Open-Source).
+                plugins: [Essentials, Paragraph, Bold, Italic],
+                toolbar: [
+                  "undo",
+                  "redo",
+                  "|",
+                  "bold",
+                  "italic",
+                  "|",
+                  "formatPainter",
+                ],
+                initialData: "<p>Hello from CKEditor 5 in React!</p>",
+              }}
+              onChange={(_, editor) => {
+                const data = editor.getData();
 
-              setValue("text", data);
-            }}
-          />
-          <span className="error-message text-[#FF435A]">
-            {errors?.text?.message}
-          </span>
-        </div>
+                setValue("text", data);
+              }}
+            />
+            <span className="error-message text-[#FF435A]">
+              {errors?.text?.message}
+            </span>
+          </div>
+        )}
         <div className="flex items-center gap-[14px]">
           <button
             type="button"
