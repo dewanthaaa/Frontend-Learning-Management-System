@@ -3,13 +3,17 @@ import { ClassicEditor, Essentials, Paragraph, Bold, Italic } from "ckeditor5";
 import "ckeditor5/ckeditor5.css";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { mutateContentSchema } from "../../../../../be-lms/src/utils/schema.js";
 import { createContent } from "../../../services/courseService.js";
 
 export default function ManageContentCreatePage() {
+  const content = useLoaderData();
+
+  console.log(content);
+
   const {
     register,
     handleSubmit,
@@ -54,7 +58,7 @@ export default function ManageContentCreatePage() {
           Course
         </span>
         <span className="last-of-type:after:content-[''] last-of-type:font-semibold">
-          Add Content
+          {content === undefined ? "Add" : "Edit"} Content
         </span>
       </div>
       <header className="flex items-center justify-between gap-[30px]">
@@ -68,7 +72,7 @@ export default function ManageContentCreatePage() {
           </div>
           <div>
             <h1 className="font-extrabold text-[28px] leading-[42px]">
-              Add Content
+              {content === undefined ? "Add" : "Edit"} Content
             </h1>
             <p className="text-[#838C9D] mt-[1]">
               Give a best content for the course
@@ -201,7 +205,7 @@ export default function ManageContentCreatePage() {
             disabled={isLoading}
             className="w-full rounded-full p-[14px_20px] font-semibold text-[#FFFFFF] bg-[#662FFF] text-nowrap"
           >
-            Add Content Now
+            {content === undefined ? "Add" : "Edit"} Content Now
           </button>
         </div>
       </form>
