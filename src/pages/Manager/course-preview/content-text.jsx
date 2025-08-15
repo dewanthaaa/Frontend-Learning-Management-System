@@ -6,10 +6,11 @@ export default function ContentText({ content, handleNext }) {
     <>
       <div className="flex flex-col gap-5 max-w-[800px] pb-[160px]">
         <h1 className="font-bold text-[32px] leading-[48px]">
-          Pengenalan UI UX
+          {content?.title}
         </h1>
         <article
           id="Content-wrapper"
+          className="prose"
           dangerouslySetInnerHTML={{ __html: content?.text }}
         />
       </div>
