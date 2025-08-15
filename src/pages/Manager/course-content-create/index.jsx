@@ -198,7 +198,7 @@ export default function ManageContentCreatePage() {
                   "|",
                   "formatPainter",
                 ],
-                initialData: "<p>Hello from CKEditor 5 in React!</p>",
+                initialData: content?.text,
               }}
               onChange={(_, editor) => {
                 const data = editor.getData();
