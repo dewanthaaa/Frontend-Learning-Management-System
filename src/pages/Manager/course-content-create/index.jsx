@@ -7,12 +7,16 @@ import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { mutateContentSchema } from "../../../../../be-lms/src/utils/schema.js";
-import { createContent } from "../../../services/courseService.js";
+import {
+  createContent,
+  updateContent,
+} from "../../../services/courseService.js";
 
 export default function ManageContentCreatePage() {
   const content = useLoaderData();
 
-  console.log(content);
+  const { id, contentId } = useParams();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -22,23 +26,37 @@ export default function ManageContentCreatePage() {
     watch,
   } = useForm({
     resolver: zodResolver(mutateContentSchema),
+    defaultValues: {
+      title: content?.title,
+      type: content?.type,
+      youtubeId: content?.youtubeId,
+      text: content?.text,
+    },
   });
 
-  const { isLoading, mutateAsync } = useMutation({
+  const mutateCreate = useMutation({
     mutationFn: (data) => createContent(data),
   });
 
-  const { id } = useParams();
-  const navigate = useNavigate();
+  const mutateUpdate = useMutation({
+    mutationFn: (data) => updateContent(data, contentId),
+  });
 
   const type = watch("type");
 
   const onSubmit = async (values) => {
     try {
-      await mutateAsync({
-        ...values,
-        courseId: id,
-      });
+      if (content === undefined) {
+        await mutateCreate.mutateAsync({
+          ...values,
+          courseId: id,
+        });
+      } else {
+        await mutateUpdate.mutateAsync({
+          ...values,
+          courseId: id,
+        });
+      }
 
       navigate(`/manager/courses/${id}`);
     } catch (error) {
@@ -202,7 +220,11 @@ export default function ManageContentCreatePage() {
           </button>
           <button
             type="submit"
-            disabled={isLoading}
+            disabled={
+              content === undefined
+                ? mutateCreate.isLoading
+                : mutateUpdate.isLoading
+            }
             className="w-full rounded-full p-[14px_20px] font-semibold text-[#FFFFFF] bg-[#662FFF] text-nowrap"
           >
             {content === undefined ? "Add" : "Edit"} Content Now

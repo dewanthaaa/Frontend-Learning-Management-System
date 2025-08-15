@@ -30,3 +30,6 @@ export const createContent = async (data) =>
 
 export const getDetailContent = async (id) =>
   apiInstanceAuth.get(`/courses/contents/${id}`).then((res) => res.data);
+
+export const updateContent = async (data, id) =>
+  apiInstanceAuth.put(`/courses/contents/${id}`, data).then((res) => res.data);
