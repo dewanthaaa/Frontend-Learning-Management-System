@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useRevalidator } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { deleteDetailContent } from "../../../services/courseService";
 
 export default function ContentItem({
   id = "1",
@@ -9,6 +11,22 @@ export default function ContentItem({
   title = "Install VSCode di Windows",
   courseId = "2",
 }) {
+  const revalidator = useRevalidator();
+
+  const { isLoading, mutateAsync } = useMutation({
+    mutationFn: () => deleteDetailContent(id),
+  });
+
+  const handleDelete = async () => {
+    try {
+      await mutateAsync();
+
+      revalidator.revalidate();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="card flex items-center gap-5">
       <div className="relative flex shrink-0 w-[140px] h-[110px] ">
@@ -51,6 +69,8 @@ export default function ContentItem({
         </Link>
         <button
           type="button"
+          disabled={isLoading}
+          onClick={handleDelete}
           className="w-fit rounded-full p-[14px_20px] bg-[#FF435A] font-semibold text-white text-nowrap"
         >
           Delete
