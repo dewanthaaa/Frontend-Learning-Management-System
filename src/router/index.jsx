@@ -97,9 +97,9 @@ const router = createBrowserRouter([
         element: <ManageContentCreatePage />,
       },
       {
-        path: "/manager/courses/:id/edit/:courseId",
+        path: "/manager/courses/:id/edit/:contentId",
         loader: async ({ params }) => {
-          const content = await getDetailContent(params.id);
+          const content = await getDetailContent(params.contentId);
 
           return content?.data;
         },
