@@ -10,6 +10,7 @@ import ManageCourseDetailPage from "../pages/Manager/course-detail/index.jsx";
 import ManageContentCreatePage from "../pages/Manager/course-content-create/index.jsx";
 import ManageCoursePreviewPage from "../pages/Manager/course-preview/index.jsx";
 import ManageStudentPage from "../pages/Manager/students/index.jsx";
+import ManageStudentCreatePage from "../pages/Manager/students-create/index.jsx";
 import StudentPage from "../pages/Student/StudentOverview/index.jsx";
 import secureLocalStorage from "react-secure-storage";
 import { MANAGER_SESSION, STORAGE_KEY } from "../utils/const.js";
@@ -117,6 +118,10 @@ const router = createBrowserRouter([
       {
         path: "/manager/students",
         element: <ManageStudentPage />,
+      },
+      {
+        path: "/manager/students/create",
+        element: <ManageStudentCreatePage />,
       },
     ],
   },
