@@ -24,6 +24,9 @@ export const updateStudent = async (data, id) =>
     })
     .then((res) => res.data);
 
+export const deleteStudent = async (id) =>
+  apiInstanceAuth.delete(`/students/${id}`).then((res) => res.data);
+
 // apiInstanceAuth
 // .get(`/students/${id}${isPreview ? "?preview=true" : ""}`)
 // .then((res) => res.data);
