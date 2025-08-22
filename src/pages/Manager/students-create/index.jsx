@@ -1,12 +1,16 @@
 import React, { useRef, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { createStudentSchema } from "../../../utils/zodSchema.js";
 import { useMutation } from "@tanstack/react-query";
 import { createStudent } from "../../../services/studentService.js";
 
 export default function ManageStudentCreatePage() {
+  const student = useLoaderData();
+
+  console.log(student);
+
   const {
     register,
     handleSubmit,
