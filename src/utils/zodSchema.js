@@ -7,6 +7,7 @@ export const signUpSchema = z.object({
 });
 
 export const signInSchema = signUpSchema.omit({ name: true });
+
 export const createCourseSchema = z.object({
   name: z.string().min(5),
   categoryId: z.string().min(5, { message: "Please choose a category" }),
@@ -16,6 +17,14 @@ export const createCourseSchema = z.object({
     .any()
     .refine((file) => file?.name, { message: "Thumbnail is required" }),
 });
+
 export const updateCourseSchema = createCourseSchema.partial({
   thumbnail: true,
+});
+
+export const createStudentSchema = z.object({
+  name: z.string().min(5),
+  email: z.string().email(),
+  password: z.string().min(5),
+  photo: z.any().refine((file) => file?.name, { message: "Photo is required" }),
 });
