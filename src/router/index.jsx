@@ -22,7 +22,8 @@ import {
   getStudentsCourse,
 } from "../services/courseService.js";
 import { getDetailStudents, getStudents } from "../services/studentService.js";
-import StudentCourseList from "../pages/Manager/student-course-list/index.jsx";
+import StudentCourseList from "../pages/Manager/student-course/index.jsx";
+import StudentForm from "../pages/Manager/student-course/student-form.jsx";
 
 const router = createBrowserRouter([
   {
@@ -148,6 +149,15 @@ const router = createBrowserRouter([
           return course?.data;
         },
         element: <StudentCourseList />,
+      },
+      {
+        path: "/manager/courses/students/:id/add",
+        loader: async () => {
+          const student = await getStudents();
+
+          return student?.data;
+        },
+        element: <StudentForm />,
       },
     ],
   },
