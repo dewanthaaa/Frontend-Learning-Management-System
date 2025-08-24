@@ -43,7 +43,7 @@ export default function StudentForm() {
       <header className="flex items-center justify-between gap-[30px]">
         <div>
           <h1 className="font-extrabold text-[28px] leading-[42px]">
-            New Course
+            Add Student
           </h1>
           <p className="text-[#838C9D] mt-[1]">Create new future for company</p>
         </div>
