@@ -7,8 +7,8 @@ export default function Sidebar({ isAdmin = true }) {
     <aside className="sidebar-container fixed h-[calc(100vh-20px)] w-full max-w-[280px] my-[10px] ml-[10px] bg-[#060A23] overflow-hidden flex flex-1 rounded-[20px]">
       <div className="scroll-container flex w-full overflow-y-scroll hide-scrollbar">
         <nav className="flex flex-col w-full h-fit p-[30px] gap-10 z-10">
-          <Link to="#">
-            <img src="/assets/images/logos/logo.svg" alt="logo" />
+          <Link to="/manager">
+            <img src="/assets/images/logos/logo2.svg" alt="logo" />
           </Link>
           <ul className="flex flex-col gap-4">
             <p className="font-semibold text-xs leading-[18px] text-white">
