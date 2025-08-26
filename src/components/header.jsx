@@ -13,7 +13,7 @@ export default function Header({ type = "manager" }) {
   const handleLogout = () => {
     secureLocalStorage.removeItem(STORAGE_KEY);
 
-    window.location.replace("/manager/sign-in");
+    window.location.replace(`/${type}/sign-in`);
   };
 
   return (
@@ -55,7 +55,7 @@ export default function Header({ type = "manager" }) {
         </button>
         <div
           id="ProfileDropdown"
-          className="absolute top-full hidden group-hover:block"
+          className="absolute top-full hidden group-hover:block z-30"
         >
           <ul className="flex flex-col w-[200px] rounded-[20px] border border-[#CFDBEF] p-5 gap-4 bg-white mt-4">
             <li className="font-semibold">
