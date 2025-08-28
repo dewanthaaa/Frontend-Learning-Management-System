@@ -33,11 +33,16 @@ import {
 import StudentCourseList from "../pages/Manager/student-course/index.jsx";
 import StudentForm from "../pages/Manager/student-course/student-form.jsx";
 import { getOverviews } from "../services/overviewService.js";
+import Pricing from "../pages/SignUp/pricing.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <ManagerHomePage />,
+    element: <SignInPage />, //This should be <ManagerHomePage /> but the page is not ready yet so temporarily set to SignInPage and make sure to work on <ManagerHomePage /> next
+  },
+  {
+    path: "/pricing",
+    element: <Pricing />,
   },
   {
     path: "/manager/sign-in",

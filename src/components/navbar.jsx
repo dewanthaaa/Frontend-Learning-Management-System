@@ -14,7 +14,7 @@ export default function Navbar() {
           <Link to="#">Home</Link>
         </li>
         <li className="font-semibold transition-all duration-300 hover:text-[#662FFF] text-white">
-          <Link to="#">Pricing</Link>
+          <Link to="/pricing">Pricing</Link>
         </li>
         <li className="font-semibold transition-all duration-300 hover:text-[#662FFF] text-white">
           <Link to="#">Features</Link>
