@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
-    <div className="flex items-center gap-[60px]">
+    <div className="flex items-center gap-[60px] max-w-56">
       <img
-        src="/assets/images/logos/logo.svg"
-        className="flex shrink-0"
+        src="/assets/images/logos/logo2.svg"
+        className="flex shrink-0 object-contain"
         alt="logo"
       />
       <ul className="flex items-center gap-10">
